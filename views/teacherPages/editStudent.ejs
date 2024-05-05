@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 50px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            margin-top: 5px;
+        }
+
+        h4 {
+            text-align: center;
+        }
+
+        .addStu .mb-3 {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .backButton {
+            border: 2px solid rgb(103, 103, 228);
+            text-decoration: none;
+            margin: 8px;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            background-color: rgb(75, 75, 188);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+       
+        <a href="/teacher/viewall" class="btn btn-info backButton">Back</a>
+
+        <h4>Edit Student - Roll No: <%= student.rollno %>
+        </h4>
+
+        <form method="POST" class="addStu" action="/update">
+            <input type="hidden" value="<%= student.rollno %>" name="rollno">
+            <div class="mb-3">
+                <label for="nameInput" class="form-label">Name:</label>
+                <input type="text" name="name" required class="form-control" value="<%= student.name %>" id="nameInput">
+            </div>
+            <div class="mb-3">
+                <label for="dobInput" class="form-label">Date of Birth:</label>
+                <input type="date" name="dob" value="<%= student.dob %>" required class="form-control" id="dobInput">
+            </div>
+            <div class="mb-3">
+                <label for="scoreInput" class="form-label">Score:</label>
+                <input type="number" name="score" value="<%= student.score %>" required class="form-control"
+                    id="scoreInput">
+            </div>
+            <button type="submit" class="btn btn-success">Update</button>
+        </form>
+    </div>
+</body>
+
+</html>

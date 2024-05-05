@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Options</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-top: 50px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn {
+      margin-top: 5px;
+    }
+
+    h4 {
+      text-align: center;
+    }
+
+    .tableDiv {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007BFF;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .actions {
+      text-align: center;
+    }
+
+    .actions a {
+      margin: 0px 5px;
+      text-decoration: none;
+    }
+
+    .actions img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .backButton {
+      border: 2px solid rgb(103, 103, 228);
+      text-decoration: none;
+      margin: 8px;
+      padding: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+      background-color: rgb(75, 75, 188);
+    }
+
+    .logoutButton {
+      border: 2px solid rgb(103, 103, 228);
+      text-decoration: none;
+      margin: 8px;
+      padding: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+      background-color: rgb(75, 75, 188);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <a href="/teacher/option" class="btn btn-info backButton">Back</a>
+    <a href="/logout" class="btn btn-info logoutButton">Logout</a>
+
+    <h4>All Students</h4>
+
+    <div class="tableDiv">
+      <table>
+        <thead>
+          <tr>
+            <th>Roll No.</th>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>Score</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <% student.forEach(function(studentValue) { %>
+            <tr class="head">
+              <td>
+                <%= studentValue.rollno %>
+              </td>
+              <td>
+                <%= studentValue.name %>
+              </td>
+              <td>
+                <%= new Date(studentValue.dob).toLocaleDateString() %>
+              </td>
+              <td>
+                <%= studentValue.score %>
+              </td>
+              <td class="actions">
+                <a href="/teacher/edit/<%= studentValue.rollno %>">
+                  <img style="margin: 0px 5px;" src="https://img.icons8.com/material-outlined/30/000000/edit.png" />
+                </a>
+                <a href="/teacher/delete/<%= studentValue.rollno %>">
+                  <img style="margin: 0px 5px;" src="https://img.icons8.com/ios-glyphs/30/000000/filled-trash.png" />
+                </a>
+              </td>
+            </tr>
+            <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>

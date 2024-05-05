@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Login</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-top: 50px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn {
+      margin-top: 5px;
+    }
+
+    h3 {
+      text-align: center;
+    }
+
+    .teachForm {
+      margin-top: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-label {
+      font-weight: bold;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .form-control:focus {
+      border-color: #007BFF;
+      outline: none;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .backButton {
+      border: 2px solid rgb(103, 103, 228);
+      text-decoration: none;
+      margin: 8px;
+      padding: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+      background-color: rgb(75, 75, 188);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <a href="/" class="btn btn-info backButton">Back</a>
+
+    <h3>Teacher Login</h3>
+
+    <div class="teachLog">
+      <form method="POST" class="teachForm" action="/loginteacher">
+        <div class="form-group">
+          <label for="email" class="form-label">EmailID:</label>
+          <input type="email" name="emailid" class="form-control" required id="email">
+          <div class="error-message" id="email-error">Email is required.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">Password:</label>
+          <input type="password" name="password" class="form-control" required id="password">
+          <div class="error-message" id="password-error">Password is required.</div>
+        </div>
+
+        <div class="form-group">
+          <input type="checkbox" style="width: 30px;" onclick="togglePasswordVisibility()">Show Password
+        </div>
+
+        <div id="message" class="danger" style="color: red; margin-bottom: 10px; text-align: center;"></div>
+        <div id="message" class="danger" style="color:red; margin-bottom: 10px; text-align: center;"
+          data-timeout="<%= timeout %>">
+          <%= message %>
+        </div>
+        <a>
+          <button type="submit" class="btn btn-primary" value="Loginteacher">Submit</button>
+        </a>
+      </form>
+    </div>
+  </div>
+
+  <!-- Script Functions for apply validations -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const messageElement = document.getElementById('message');
+      const timeout = parseInt(messageElement.getAttribute('data-timeout'), 7);
+
+      setTimeout(() => {
+        messageElement.style.display = 'none';
+      }, timeout);
+    });
+
+    // Function to toggle password visibility
+    function togglePasswordVisibility() {
+      const passwordInput = document.getElementById('password');
+      passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+    }
+
+    // Form validation
+    document.querySelector('form').addEventListener('submit', (event) => {
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      let valid = true;
+
+      // Validate email
+      if (!emailInput.value.trim()) {
+        document.getElementById('email-error').style.display = 'block';
+        valid = false;
+      } else {
+        document.getElementById('email-error').style.display = 'none';
+      }
+
+      // Validate password
+      if (!passwordInput.value.trim()) {
+        document.getElementById('password-error').style.display = 'block';
+        valid = false;
+      } else {
+        document.getElementById('password-error').style.display = 'none';
+      }
+
+      if (!valid) {
+        event.preventDefault(); // Prevent form submission if validation fails
+      }
+    });
+  </script>
+</body>
+
+</html>
